@@ -10,9 +10,13 @@ use App\Http\Controllers\Admin\QuestionController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\QuizController as UserQuizController;
 use App\Http\Controllers\CommunityController;
+use App\Http\Controllers\HomeController;
+
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/', function () {return view('home');});
+
 
 // ======= Public Routes ======= //
-Route::get('/', fn () => view('home'));
 Route::view('/tentang', 'tentang.index');
 
 // ======= User Auth ======= //

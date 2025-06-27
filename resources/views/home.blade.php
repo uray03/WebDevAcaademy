@@ -2,6 +2,7 @@
 @section('title', 'Beranda')
 
 @section('content')
+@include('components.alert')
 
 <style>
     body, html {

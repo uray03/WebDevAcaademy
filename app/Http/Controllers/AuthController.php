@@ -16,8 +16,9 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        // Debugging sementara
-        
+        logger($request->all());
+        logger($request->session()->all());
+
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
@@ -25,13 +26,13 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/');
+            return redirect()->intended('/')->with('success', 'Login berhasil!');
         }
+        
 
-        return back()->withErrors([
-            'email' => 'Email atau password salah.',
-        ]);
+        return back()->with('error', 'Email atau password salah.');
     }
+
 
     public function showRegister()
     {
