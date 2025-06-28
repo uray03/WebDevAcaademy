@@ -12,6 +12,7 @@ use App\Http\Controllers\QuizController as UserQuizController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\HomeController;
 
+
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/', function () {return view('home');});
 
@@ -55,7 +56,6 @@ Route::middleware('auth')->group(function () {
 });
 
 // ======= Admin Routes ======= //
-// ======= Admin Routes ======= //
 Route::prefix('admin')->name('admin.')->group(function () {
 
     // Auth
@@ -73,6 +73,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/courses/{course}/edit', [AdminCourseController::class, 'edit'])->name('courses.edit');
         Route::put('/courses/{course}', [AdminCourseController::class, 'update'])->name('courses.update');
         Route::delete('/courses/{course}', [AdminCourseController::class, 'destroy'])->name('courses.destroy');
+        // Tambah gambar untuk kursus
+        Route::post('/courses/{course}/images', [AdminCourseController::class, 'uploadImage'])->name('courses.images.upload');
+        // Hapus gambar
+        Route::delete('/courses/images/{image}', [AdminCourseController::class, 'deleteImage'])->name('courses.images.delete');
 
         // Modules
         Route::get('/courses/{course}/modules/create', [ModuleController::class, 'create'])->name('modules.create');
@@ -88,12 +92,27 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/quizzes/{quiz}/edit', [QuizController::class, 'edit'])->name('quizzes.edit');
         Route::put('/quizzes/{quiz}', [QuizController::class, 'update'])->name('quizzes.update');
         Route::delete('/quizzes/{quiz}', [QuizController::class, 'destroy'])->name('quizzes.destroy');
-
+       
         // Kelola Pertanyaan
         Route::get('/quizzes/{quiz}/questions', [QuestionController::class, 'index'])->name('questions.index');
         Route::get('/quizzes/{quiz}/questions/create', [QuestionController::class, 'create'])->name('questions.create');
         Route::post('/quizzes/{quiz}/questions', [QuestionController::class, 'store'])->name('questions.store');
 
+        // ===== Kategori =====
+        Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+        Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+        Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+        Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+        Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+
+        // ===== Tingkat Kesulitan =====
+        Route::get('/difficulty-levels', [DifficultyLevelController::class, 'index'])->name('difficulty-levels.index');
+        Route::get('/difficulty-levels/create', [DifficultyLevelController::class, 'create'])->name('difficulty-levels.create');
+        Route::post('/difficulty-levels', [DifficultyLevelController::class, 'store'])->name('difficulty-levels.store');
+        Route::get('/difficulty-levels/{difficulty_level}/edit', [DifficultyLevelController::class, 'edit'])->name('difficulty-levels.edit');
+        Route::put('/difficulty-levels/{difficulty_level}', [DifficultyLevelController::class, 'update'])->name('difficulty-levels.update');
+        Route::delete('/difficulty-levels/{difficulty_level}', [DifficultyLevelController::class, 'destroy'])->name('difficulty-levels.destroy');
     });
 });
 

@@ -19,6 +19,30 @@
             <textarea name="description" id="description" rows="5" class="w-full border rounded px-3 py-2" required>{{ old('description', $course->description) }}</textarea>
         </div>
 
+        <div class="mb-4">
+            <label for="category_id" class="block font-medium mb-1">Kategori</label>
+            <select name="category_id" id="category_id" class="w-full border rounded px-3 py-2" required>
+                <option value="">-- Pilih Kategori --</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" {{ $course->category_id == $category->id ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label for="difficulty_level_id" class="block font-medium mb-1">Tingkat Kesulitan</label>
+            <select name="difficulty_level_id" id="difficulty_level_id" class="w-full border rounded px-3 py-2" required>
+                <option value="">-- Pilih Tingkat Kesulitan --</option>
+                @foreach ($difficultyLevels as $level)
+                    <option value="{{ $level->id }}" {{ $course->difficulty_level_id == $level->id ? 'selected' : '' }}>
+                        {{ $level->name }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
         <button type="submit" class="bg-indigo-600 text-white px-4 py-2 rounded">Simpan Perubahan</button>
     </form>
 @endsection

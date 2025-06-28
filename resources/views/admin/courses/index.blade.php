@@ -18,8 +18,10 @@
     <table class="w-full bg-white rounded shadow overflow-hidden">
         <thead>
             <tr class="bg-gray-100 text-left text-sm">
+                <th class="px-4 py-2">Thumbnail</th>
                 <th class="px-4 py-2">Judul</th>
-                <th class="px-4 py-2">Deskripsi</th>
+                <th class="px-4 py-2">Kategori</th>
+                <th class="px-4 py-2">Tingkat</th>
                 <th class="px-4 py-2">Dibuat</th>
                 <th class="px-4 py-2">Aksi</th>
             </tr>
@@ -27,12 +29,24 @@
         <tbody>
             @forelse ($courses as $course)
                 <tr class="border-t text-sm">
+                    <td class="px-4 py-2">
+                        @if($course->thumbnail)
+                            <img src="{{ asset('storage/' . $course->thumbnail) }}" alt="Thumbnail" class="h-16 w-16 object-cover rounded">
+                        @else
+                            <span class="text-gray-400">-</span>
+                        @endif
+                    </td>
                     <td class="px-4 py-2 font-semibold">
                         <a href="{{ route('admin.courses.show', $course->id) }}" class="text-blue-600 underline hover:font-bold">
                             {{ $course->title }}
                         </a>
                     </td>
-                    <td class="px-4 py-2">{{ Str::limit($course->description, 80) }}</td>
+                    <td class="px-4 py-2">
+                        {{ $course->category ? $course->category->name : '-' }}
+                    </td>
+                    <td class="px-4 py-2">
+                        {{ $course->difficultyLevel ? $course->difficultyLevel->name : '-' }}
+                    </td>
                     <td class="px-4 py-2">{{ $course->created_at->format('d M Y') }}</td>
                     <td class="px-4 py-2 space-y-1 space-x-2">
                         <a href="{{ route('admin.modules.create', $course->id) }}" class="text-blue-500 underline">+ Modul</a>
@@ -58,7 +72,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4" class="text-center py-4 text-gray-500">Belum ada kursus.</td>
+                    <td colspan="6" class="text-center py-4 text-gray-500">Belum ada kursus.</td>
                 </tr>
             @endforelse
         </tbody>

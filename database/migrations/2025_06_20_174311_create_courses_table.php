@@ -13,9 +13,18 @@ return new class extends Migration
             $table->string('title');
             $table->text('description');
             $table->string('thumbnail')->nullable();
+            $table->uuid('category_id')->nullable();
+            $table->uuid('difficulty_level_id')->nullable();
             $table->timestamps();
+        
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('set null');
+            $table->foreign('difficulty_level_id')->references('id')->on('difficulty_levels')->onDelete('set null');
+        
+            $table->engine = 'InnoDB';
         });
-    }
+             
+    }    
+    
     
 
     /**

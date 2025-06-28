@@ -75,4 +75,33 @@
         @endforelse
     </div>
 
+    {{-- Galeri Gambar --}}
+    <div class="mt-10">
+        <h2 class="text-xl font-semibold mb-4">Galeri Gambar</h2>
+
+        <form action="{{ route('admin.courses.images.upload', $course->id) }}" method="POST" enctype="multipart/form-data" class="mb-4">
+            @csrf
+            <input type="file" name="image" required class="mb-2">
+            <button type="submit" class="bg-indigo-600 text-white px-3 py-1 rounded">Upload</button>
+        </form>
+
+        @if ($course->images->count())
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                @foreach ($course->images as $image)
+                    <div class="relative">
+                        <img src="{{ asset('storage/' . $image->image_path) }}" class="w-full h-32 object-cover rounded">
+                        <form action="{{ route('admin.courses.images.delete', $image->id) }}" method="POST" class="absolute top-1 right-1">
+                            @csrf
+                            @method('DELETE')
+                            <button class="bg-red-500 text-white px-2 rounded">X</button>
+                        </form>
+                    </div>
+                @endforeach
+            </div>
+        @else
+            <p class="text-gray-600">Belum ada gambar untuk kursus ini.</p>
+        @endif
+    </div>
+
+
 @endsection
