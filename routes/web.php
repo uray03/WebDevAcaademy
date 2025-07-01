@@ -14,8 +14,6 @@ use App\Http\Controllers\HomeController;
 
 
 Route::get('/', [HomeController::class, 'index']);
-Route::get('/', function () {return view('home');});
-
 
 // ======= Public Routes ======= //
 Route::view('/tentang', 'tentang.index');

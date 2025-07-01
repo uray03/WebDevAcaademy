@@ -1,186 +1,94 @@
-@extends('layouts.app')
-@section('title', 'Beranda')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevAcademy - Beranda</title>
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+<body>
 @include('components.alert')
 
-<style>
-    body, html {
-        margin: 0;
-        padding: 0;
-        font-family: sans-serif;
-        scroll-behavior: smooth;
-    }
-
-    .hero {
-        min-height: 100vh;
-        width: 100%;
-        background-color: #3b82f6;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        padding: 2rem;
-        margin-top: -70px; /* Sesuaikan tinggi navbar kamu, misal navbar fixed */
-    }
-
-    .hero-content {
-        max-width: 700px;
-    }
-
-    .hero h1 {
-        font-size: 3rem;
-        font-weight: 800;
-        margin-bottom: 0.5rem;
-    }
-
-    .hero h2 {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-    }
-
-    .hero p {
-        font-size: 1.1rem;
-        margin-bottom: 2rem;
-        line-height: 1.6;
-    }
-
-    .buttons {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 1rem;
-        flex-wrap: wrap;
-    }
-
-    .btn-start {
-        background-color: white;
-        color: #3b82f6;
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 8px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: 0.3s;
-        text-decoration: none;
-    }
-
-    .btn-start:hover {
-        background-color: #2563eb;
-        color: white;
-    }
-
-    .scroll-btn {
-        width: 44px;
-        height: 44px;
-        border: 2px solid white;
-        border-radius: 50%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        animation: bounce 2s infinite;
-        cursor: pointer;
-        text-decoration: none;
-    }
-
-    .scroll-btn i {
-        color: white;
-        font-size: 16px;
-    }
-
-    @keyframes bounce {
-        0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-        40% { transform: translateY(-10px); }
-        60% { transform: translateY(-5px); }
-    }
-
-    section {
-        padding: 60px 20px;
-        text-align: center;
-    }
-
-    #services {
-        background-color: #f3f4f6;
-    }
-
-    /* FAQ Styles */
-    .faq-item {
-        background: white;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        margin: 10px auto;
-        max-width: 800px;
-        padding: 15px;
-        cursor: pointer;
-        text-align: left;
-    }
-
-    .faq-item h4 {
-        margin: 0;
-        font-size: 1rem;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .faq-answer {
-        display: none;
-        margin-top: 10px;
-        color: #555;
-    }
-
-    .faq-item.active .faq-answer {
-        display: block;
-    }
-</style>
-
-<div class="hero" style="width: 100vw; margin-left: calc(-50vw + 50%);">
-    <div class="hero-content">
-        <h1>DevAcademy</h1>
-        <h2>Learning Today, Empower Your Dream</h2>
-        <p>Pelajari skill digital masa kini lewat kursus profesional, proyek nyata, dan bimbingan langsung dari mentor berpengalaman.</p>
-        <div class="buttons">
-            <a href="{{ url('/kursus') }}" class="btn-start">Mulai Sekarang</a>
-
-            <a href="#services" class="scroll-btn">
-                <i class="fas fa-chevron-down"></i>
-            </a>
+<div class="hero">
+    <div class="hero-content" data-aos="fade-up">
+        <div class="devacademy-pill">
+            <span>DevAcademy</span>
+        </div>
+        <h2>Learning Today, <span class="highlight-blue">Empower Your</span> dreams.</h2>
+        <p class="text-base text-gray-600 mb-6">
+            Pelajari skill digital masa kini melalui pelatihan yang praktis, uji pemahaman, dan bimbingan dari mentor yang siap membantu.
+        </p>
+        <div class="buttons flex justify-center mt-6">
+            <a href="{{ url('/kursus') }}" class="button-primary">Mulai Belajar</a>
         </div>
     </div>
 </div>
 
-<section id="services">
-    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Our Services</h2>
-    <p>Kami menawarkan berbagai layanan untuk membantu Anda membangun produk digital.</p>
-</section>
-
-<section id="faq">
-    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Frequently Asked Questions</h2>
-
-    <div class="faq-item">
-        <h4>Apa itu DevAcademy? <i class="fas fa-chevron-down"></i></h4>
-        <div class="faq-answer">DevAcademy adalah platform pembelajaran daring yang menyediakan kursus digital berkualitas.</div>
-    </div>
-
-    <div class="faq-item">
-        <h4>Apakah DevAcademy gratis? <i class="fas fa-chevron-down"></i></h4>
-        <div class="faq-answer">Kami menyediakan kursus gratis yang langsung bisa diakses untuk mulai belajar menjadi developer.</div>
-    </div>
-
-    <div class="faq-item">
-        <h4>Bagaimana cara mendaftar kursus? <i class="fas fa-chevron-down"></i></h4>
-        <div class="faq-answer">Cukup klik tombol "Mulai Sekarang" dan pilih kursus yang Anda inginkan.</div>
+<section id="services" data-aos="fade-up">
+    <h2 class="section-title">Our Services</h2>
+    <div class="service-grid">
+        <div class="service-card" onclick="selectService(this, 'explore-courses')">
+            <h3>Course</h3>
+            <p>Kuasai skill digital dari dasar hingga mahir lewat kursus yang bisa kamu akses kapan saja.</p>
+        </div>
+        <div class="service-card" onclick="selectService(this, 'kuis')">
+            <h3>Quiz</h3>
+            <p>Gunakan kuis untuk melihat kemampuanmu dan temukan materi sesuai kebutuhanmu.</p>
+        </div>
+        <div class="service-card" onclick="selectService(this, 'community')">
+            <h3>Komunitas</h3>
+            <p>Bertukar ilmu dan berdiskusi dengan peserta lain di komunitas DevAcademy.</p>
+        </div>
+        <div class="service-card" onclick="selectService(this, 'certificate')">
+            <h3>Certificate</h3>
+            <p>Setelah menyelesaikan kursus, dapatkan sertifikat resmi sebagai bukti skill-mu.</p>
+        </div>
     </div>
 </section>
 
+<section id="explore-courses" data-aos="fade-up">
+    <h2>Explore Courses</h2>
+    <div class="courses-grid">
+        <div class="course-card">
+            <img src="..." alt="Thumbnail">
+            <h3>Learning Personal Branding</h3>
+            <p>2,905,054 viewers • 47m</p>
+        </div>
+    </div>
+</section>
+
+<section id="kuis" data-aos="fade-up">
+    <h2>Quick Quiz, Smarter Learning</h2>
+    <p>Take a short quiz to discover your skill level and start learning in the right place.</p>
+</section>
+
+<section id="certificate" data-aos="fade-up">
+    <h2>Learn with Experts by Your Side</h2>
+    <p>Explore Role Guides to support your career advancement...</p>
+</section>
+
+<section id="community" data-aos="fade-up">
+    <h2>Bergabung dengan Komunitas</h2>
+    <p>Bertukar ilmu, bertanya, dan terhubung dengan peserta lain di komunitas DevAcademy.</p>
+</section>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-    const faqItems = document.querySelectorAll('.faq-item');
-    faqItems.forEach(item => {
-        item.addEventListener('click', () => {
-            item.classList.toggle('active');
-        });
-    });
-</script>
+AOS.init({ duration: 800, once: true });
 
-@endsection
+function scrollToSection(sectionId) {
+    const section = document.getElementById(sectionId);
+    if (section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
+function selectService(element, targetId) {
+    document.querySelectorAll('.service-card').forEach(card => card.classList.remove('active'));
+    element.classList.add('active');
+    scrollToSection(targetId);
+}
+</script>
+</body>
+</html>
