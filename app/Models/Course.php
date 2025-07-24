@@ -29,10 +29,16 @@ class Course extends Model
         return $this->belongsTo(DifficultyLevel::class);
     }
 
+    public function image()
+    {
+        return $this->hasOne(CourseImage::class);
+    }    
+
     public function images()
     {
         return $this->hasMany(CourseImage::class);
     }
+
 
     public function modules()
     {

@@ -11,12 +11,23 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\QuizController as UserQuizController;
 use App\Http\Controllers\CommunityController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TentangController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CertificateController;
 
 
+
+Route::get('/kontak', [ContactController::class, 'index'])->name('kontak');
+Route::post('/kontak', [ContactController::class, 'send'])->name('kontak.send');
+Route::get('/tentang', [TentangController::class, 'index'])->name('tentang');
+
+Route::get('/kategori/{slug}', [CategoryController::class, 'show'])->name('category.show');
 Route::get('/', [HomeController::class, 'index']);
+Route::get('/kursus', [CourseController::class, 'index'])->name('courses.index');
+Route::get('/kursus/kategori/{slug}', [CourseController::class, 'category'])->name('courses.category');
 
 // ======= Public Routes ======= //
-Route::view('/tentang', 'tentang.index');
 
 // ======= User Auth ======= //
 Route::get('/login', [UserAuthController::class, 'showLogin'])->name('login');

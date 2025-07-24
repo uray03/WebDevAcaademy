@@ -44,5 +44,26 @@ class CourseController extends Controller
     
         return view('kursus.show', compact('course', 'enrollment'));
     }
+
+    public function homeExplore()
+    {
+        $categories = [
+            'pemrograman-web' => 'Pemrograman Web',
+            'desain-grafis' => 'Desain Grafis',
+            'digital-marketing' => 'Digital Marketing',
+        ];
+
+        $categoryCourses = [];
+        foreach ($categories as $slug => $name) {
+            $categoryCourses[] = [
+                'slug' => $slug,
+                'name' => $name,
+                'courses' => Course::where('category_slug', $slug)->latest()->take(4)->get(),
+            ];
+        }
+
+        return view('home.explore', compact('categoryCourses'));
+    }
+
     
 }
